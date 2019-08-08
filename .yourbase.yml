@@ -1,1 +1,36 @@
-
+build_targets:
+- commands:
+  - chmod +x yourbased.sh
+  - sh ./yourbased.sh
+  container:
+    image: yourbase/yb_ubuntu:16.04
+  environment:
+  - BUNDLE_GEMFILE=gemfiles/rails-5-0.gemfile
+  name: 2.5.1_rails-5-0.gemfile
+- commands:
+  - chmod +x yourbased.sh
+  - sh ./yourbased.sh
+  container:
+    image: yourbase/yb_ubuntu:16.04
+  environment:
+  - BUNDLE_GEMFILE=gemfiles/rails-latest-release.gemfile
+  name: 2.5.1_rails-latest-release.gemfile
+- commands:
+  - chmod +x yourbased.sh
+  - sh ./yourbased.sh
+  container:
+    image: yourbase/yb_ubuntu:16.04
+  environment:
+  - BUNDLE_GEMFILE=gemfiles/rails-edge.gemfile
+  name: 2.5.1_rails-edge.gemfile
+ci:
+  builds:
+  - build_target: 2.5.1_rails-5-0.gemfile
+    name: 2.5.1_rails-5-0.gemfile
+  - build_target: 2.5.1_rails-latest-release.gemfile
+    name: 2.5.1_rails-latest-release.gemfile
+  - build_target: 2.5.1_rails-edge.gemfile
+    name: 2.5.1_rails-edge.gemfile
+dependencies:
+  build:
+  - ruby:2.5.1
